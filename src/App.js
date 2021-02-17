@@ -1,30 +1,53 @@
 import React, { useState } from 'react';
 import Todos from './components/Todos/Todos';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+
 export default function App() {
   const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    let todo = e.target.value;
-    // console.log(todo);
-    setTasks((prevTasks) => [...prevTasks, { task: todo }]);
+    setTasks((prevTasks) => [...prevTasks, task]);
   };
+  const handleChange = (e) => {
+    setTask(() => e.target.value);
+  };
+  // console.log(tasks);
+
   return (
-    <div className="box">
-      <form onSubmit={handleSubmit}>
-        <div className="field">
-          <label className="label" htmlFor="task" />
-          <input
-            className="input"
-            id="task"
-            type="text"
-            placeholder="Enter A Task"
-          />
+    <>
+      <section className="hero is-info">
+        <div className="hero-body">
+          <p className="title">TODO APP</p>
+          <p className="subtitle">never miss your tasks again</p>
         </div>
-      </form>
+      </section>
+      <div className="box columns is-centered">
+        <form onSubmit={handleSubmit}>
+          <div className="field has-addons">
+            <div className="control has-icons-left">
+              <span className="icon">
+                <FontAwesomeIcon icon={faCheckCircle} />
+              </span>
+              <input
+                className="input is-rounded column"
+                id="task"
+                type="text"
+                placeholder="Enter A Task"
+                onChange={handleChange}
+                value={task}
+              />
+            </div>
+            <div className="control">
+              <button className="button is-info is-rounded">ADD</button>
+            </div>
+          </div>
+        </form>
+      </div>
       {tasks.length !== 0 ? <Todos tasks={tasks} /> : null}
-    </div>
+    </>
   );
 }
