@@ -11,6 +11,7 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setTasks((prevTasks) => [...prevTasks, task]);
+    setTask('');
   };
   const handleChange = (e) => {
     setTask(() => e.target.value);

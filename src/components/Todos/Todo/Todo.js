@@ -1,31 +1,23 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState } from 'react';
 
-export default function Todo({ tasks }) {
+export default function Todo({ todo }) {
   const [show, setShow] = useState(true);
-  const newTasks = [...tasks];
-
-  useEffect(() => {
-    newTasks.map((ele, index) => (newTasks[index] = { name: ele, show: show }));
-    return () => {};
-  }, [tasks]);
-
-  console.log(newTasks);
-
-  const handleDone = () => {};
-  const handleRemove = () => {
+  const handleDone = () => {
+    console.log('done');
     setShow(false);
   };
+  // const handleRemove = () => {
+  //   console.log('remove');
+  // };
   return (
-    <div>
-      {tasks
-        .filter((todo) => todo.show !== false)
-        .map((todo, index) => (
-          <div key={todo}>
-            <h2>{todo}</h2>
-            <button onClick={handleDone}>DONE</button>
-            <button onClick={handleRemove}>REMOVE</button>
-          </div>
-        ))}
-    </div>
+    show && (
+      <div className="columns is-gapless is-vcentered is-centered">
+        <h2 className="column is-four-fifths ">{todo}</h2>
+        <button className="column button is-info is-light" onClick={handleDone}>
+          DONE
+        </button>
+        {/* <button onClick={handleRemove}>REMOVE</button> */}
+      </div>
+    )
   );
 }

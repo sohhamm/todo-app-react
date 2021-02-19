@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Todo from './Todo/Todo';
 
 export default function Todos({ tasks }) {
   return (
     <div>
-      <Todo tasks={tasks} />
+      {tasks.map((todo) => (
+        <Todo key={todo} todo={todo} />
+      ))}
     </div>
   );
 }
